@@ -1,11 +1,23 @@
+# Uncomment if using BB
+#CC = arm-none-eabi-gcc
+PROJ_NAME = RT_LOGGER
 SRC = ./src
 OBJ := ./build
-CFLAGS = -I./inc
+
+OPTVAL = -O0
+
+CFLAGS = -I./inc \
+				 -Wall \
+				 -g	\
+				 $(OPTVAL)
+
 LIBS= -lpthread -lrt
+
 SOURCES := $(wildcard $(SRC)/*.c)
 OBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SOURCES))
+TARGET := $(PROJ_NAME)
 
-myprog: $(OBJECTS)
+$(TARGET): $(OBJECTS)
 	$(CC)  $^ -o $@ $(LIBS)
 
 $(OBJ)/%.o: $(SRC)/%.c
@@ -14,4 +26,4 @@ $(OBJ)/%.o: $(SRC)/%.c
 .PHONY: clean
 
 clean:
-	rm -f $(OBJ)/*.o myprog
+	rm -f $(OBJ)/*.o $(TARGET)
