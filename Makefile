@@ -7,10 +7,7 @@ OBJ := ./build
 OPTVAL = -O0
 
 CFLAGS = -I./inc \
-				 -Wall \
-				 -g	\
-				 $(OPTVAL)
-
+				 
 LIBS= -lpthread -lrt
 
 SOURCES := $(wildcard $(SRC)/*.c)

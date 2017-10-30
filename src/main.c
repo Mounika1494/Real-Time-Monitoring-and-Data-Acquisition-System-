@@ -45,7 +45,8 @@ int main (int argc, char *argv[])
      threadParams[i].threadIdx=i;
    }
 /*********************************************************************************/
-  //initializeServer();
+  //initializeSensors();
+  // Open msg queue and send loggerdata message
 /*********************************************************************************/
 
 	//Thread creation

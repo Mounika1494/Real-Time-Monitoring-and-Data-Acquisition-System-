@@ -14,9 +14,11 @@
 #include <string.h>
 #include <stdint.h>
 #include <math.h>
+#include "error.h"
 
 #define NUM_THREADS 5
 #define POSIX_QUEUE
+#define MAX_SIZE 20
 
 typedef struct
 {
@@ -27,12 +29,31 @@ threadParams_t threadParams[NUM_THREADS];
 
 typedef union{
 
-  uint8_t type;
-  uint8_t status;
-  uint8_t error;
   float_t lightData;
   float_t temperatureData;
+  char loggerData[MAX_SIZE];
+}data_t;
+
+typedef enum{
+  LIGHT_SENSOR_DATA,
+  LIGHT_SENSOR_INTERRUPT,
+  TEMP_SENSOR_DATA,
+  TEMP_SENSOR_INTERRUPT,
+  LOGGER_DATA
+}source_t;
+
+typedef enum{
+  BAD = 1,
+  GOOD
+}status_t;
+
+typedef struct
+{
+  source_t type;
+  status_t status;
+  error_t error;
   time_t timestamp;
+  data_t data;
 }message_t;
 
 void *lightThread(void *threadp);

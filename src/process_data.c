@@ -3,14 +3,36 @@
 
 void *processorThread(void *threadp)
 {
+  // wait on the queue
+  // Read from message queue
+  //switch case based on type of message_t
 
-
-  // Initializing in main
-  // Read Light sensor value
-  // Add any error encountered
-  // Add current status
-  // open message queue
-  // Push data to message queue
-
+  // switch (source):
+  //
+  // case light:
+  //
+  //     calc luminosity from datasheet eqns
+  //     pushback to queue with message type logger, data lightdata (calculated luminosity val)
+  // case light_interrupt:
+  //     identify dark or light_interrupt
+  //     pushback to queue with message type logger, data loggerdata
+  // case temperature:
+  //     calc in degC from datasheet eqns
+  //     pushback to queue with message type logger, data tempdata (calculated degC val)
+  //
+  // case temperature_interrupt:
+  //     identify dark or light_interrupt
+  //     pushback to queue with message type logger, data loggerdata
+  //
+  // case error:
+  //     pushback to queue (not yours!!!)
+  //
+  // case logger:
+  //     pushback to queue (not yours!!!)
+  //
+  // default:
+  //
+  //     pushback to queue (not yours!!!)
+  //     
   printf("\n process thread \n");
 }

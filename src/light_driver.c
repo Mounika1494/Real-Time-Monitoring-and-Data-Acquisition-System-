@@ -16,7 +16,8 @@ void *lightThread(void *threadp)
   // Add any error encountered
   // Add current status
   // open message queue
-  // Push data to message queue
+  // If light value over a vertain threshold (pushfront, update type enum to light_interrupt)
+  // Else pushback
 
   printf("\n light thread \n");
 }
