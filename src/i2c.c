@@ -76,7 +76,7 @@ int8_t read_one_byte(int *fileHandle, uint8_t reg, uint8_t *data){
 
 
 int8_t read_two_byte(int *fileHandle, uint8_t reg, uint16_t *data){
-
+  //dummy comment
   //  uint8_t command_byte = (0x80|0x20|reg );//commandbyte|reg address
   pthread_mutex_lock(&i2c_mutex);
   if (write(*fileHandle, &reg, 1) != 1) {
