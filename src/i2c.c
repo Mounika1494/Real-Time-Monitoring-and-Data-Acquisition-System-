@@ -37,7 +37,7 @@ int8_t i2c_init(int *fileHandle, char *filename, uint8_t slaveAddress){
 }
 
 
-int8_t write_one_byte(int *fileHandle, uint8_t reg, uint8_t data){
+int8_t write_one_byte(int *fileHandle, uint8_t reg, uint16_t data){
 
     //uint8_t command_byte = (0x80|reg );// command|no idea|register address
   pthread_mutex_lock(&i2c_mutex);
@@ -45,7 +45,7 @@ int8_t write_one_byte(int *fileHandle, uint8_t reg, uint8_t data){
   	perror("Write error: ");
     return FAIL;
   }
-  if (write(*fileHandle, &data, 1) != 1) {
+  if (write(*fileHandle, &data, 2) != 2) {
 	perror("Write error:");
   return FAIL;
   }
@@ -54,6 +54,8 @@ int8_t write_one_byte(int *fileHandle, uint8_t reg, uint8_t data){
   return SUCCESS;
 
 }
+
+
 
 
 int8_t read_one_byte(int *fileHandle, uint8_t reg, uint8_t *data){
