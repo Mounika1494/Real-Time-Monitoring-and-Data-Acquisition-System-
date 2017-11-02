@@ -3,9 +3,25 @@
 
 static int i = 0;
 
-// signal handlers releases the semaphore based on val
+
 void sighler (union sigval val){
-  printf("Handler entered with value :%d for %d times\n", val.sival_int, ++i);
+  //printf("Handler entered with value :%d for %d times\n", val.sival_int, ++i);
+  static int count;
+  ++count;
+
+  switch(count){
+    case 1:
+      sem_post(&lightSem);
+      break;
+    case 2:
+      sem_post(&tempSem);
+      count = 0;
+      break;
+    default:
+      break;
+
+  }
+
 }
 
 void *sequencerThread(void *threadp){
@@ -23,7 +39,7 @@ void *sequencerThread(void *threadp){
   pthread_attr_init( &attr );
 
   struct sched_param parm;
-  parm.sched_priority = 255;
+  parm.sched_priority = 50;
   pthread_attr_setschedparam(&attr, &parm);
 
   struct sigevent sig;
@@ -45,7 +61,7 @@ void *sequencerThread(void *threadp){
       //issue the periodic timer request here.
       Ret = timer_settime(timerid, 0, &in, &out);
       if(Ret == 0)
-          sleep(4);
+          sleep(8);
       else
           printf("timer_settime() failed with %d\n", errno);
       //delete the timer.

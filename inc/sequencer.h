@@ -3,7 +3,9 @@
 
 #include "system.h"
 #include <errno.h>
+#include <semaphore.h>
 
+sem_t lightSem, tempSem;
 void sighler (union sigval val);
 void *sequencerThread(void *threadp);
 

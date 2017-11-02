@@ -1,4 +1,5 @@
 #include "system.h"
+#include "sequencer.h"
 
 void *temperatureThread(void *threadp)
 {
@@ -11,5 +12,10 @@ void *temperatureThread(void *threadp)
   // open message queue
   // If temperature value over a certain threshold (pushfront, update type enum to light_interrupt)
   // Else pushback
-  printf("\n temp thread \n");
+  printf("\n waiting for temp semaphore\n");
+  while(1){
+    printf("\n temp thread \n");
+    sem_wait(&tempSem);
+  }
+
 }

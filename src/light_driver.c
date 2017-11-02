@@ -1,5 +1,6 @@
 #include "system.h"
 #include "APDS9103.h"
+#include "sequencer.h"
 
 #ifdef POSIX_QUEUE
   #include <mqueue.h>
@@ -18,6 +19,10 @@ void *lightThread(void *threadp)
   // open message queue
   // If light value over a vertain threshold (pushfront, update type enum to light_interrupt)
   // Else pushback
+  printf("\n waiting for lightsem \n");
+  while(1){
+    sem_wait(&lightSem);
+    printf("\n light thread \n");
+  }
 
-  printf("\n light thread \n");
 }
