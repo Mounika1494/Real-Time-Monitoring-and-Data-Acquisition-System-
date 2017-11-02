@@ -24,7 +24,6 @@ void *lightThread(void *threadp)
     sem_wait(&lightSem);
     printf("\n light thread \n");
     sem_post(&sensor_finish_sem);
-
   }
 
 }

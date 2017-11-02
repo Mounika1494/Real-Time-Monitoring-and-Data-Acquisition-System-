@@ -23,6 +23,7 @@ int main (int argc, char *argv[])
   sem_init(&sensor_finish_sem,0,2);
 
 
+
   mainpid=getpid();
 
   /* Scheduler */
@@ -80,6 +81,7 @@ int main (int argc, char *argv[])
 		 &rt_sched_attr[3],     // use default attributes
 		 loggerThread, // thread function entry point
 		 (void *)&(threadParams[3]) // parameters to pass in		//Cant pass nothing so just pass a number
+
 		);
 
   pthread_create(&threads[4],   // pointer to thread descriptor
