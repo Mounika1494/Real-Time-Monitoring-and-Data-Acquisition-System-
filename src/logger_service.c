@@ -1,8 +1,9 @@
 #include "system.h"
+#include "sequencer.h"
 
 void *loggerThread(void *threadp)
 {
-  printf("\n logger thread \n");
+
   //
   // switch (source):
   //
@@ -22,5 +23,10 @@ void *loggerThread(void *threadp)
   //     tODO: if many error occur continously, send a signal to sequencer to reinitialize
   // default:
   //     pushback to queue (not yours!!!)
+  printf("\n waiting in logSem \n");
+  while(1){
+    sem_wait(&logSem);
+    printf("got into log thread\n");
+  }
 
 }

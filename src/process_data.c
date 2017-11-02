@@ -1,5 +1,5 @@
 #include "system.h"
-
+#include "sequencer.h"
 
 void *processorThread(void *threadp)
 {
@@ -33,6 +33,10 @@ void *processorThread(void *threadp)
   // default:
   //
   //     pushback to queue (not yours!!!)
-  //     
-  printf("\n process thread \n");
+  //
+  printf("\n process thread waiting on proc_sem\n");
+  while(1){
+    sem_wait(&procSem);
+    printf("got into process thread\n");
+  }
 }
