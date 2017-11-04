@@ -1,38 +1,64 @@
 #include "system.h"
-
+#include "sequencer.h"
+#include <sys/time.h>
 
 void *processorThread(void *threadp)
 {
-  // wait on the queue
-  // Read from message queue
-  //switch case based on type of message_t
+  int nbytes,prio;
+  message_t sensor_recv;
+  struct timeval tv;
 
-  // switch (source):
-  //
-  // case light:
-  //
-  //     calc luminosity from datasheet eqns
-  //     pushback to queue with message type logger, data lightdata (calculated luminosity val)
-  // case light_interrupt:
-  //     identify dark or light_interrupt
-  //     pushback to queue with message type logger, data loggerdata
-  // case temperature:
-  //     calc in degC from datasheet eqns
-  //     pushback to queue with message type logger, data tempdata (calculated degC val)
-  //
-  // case temperature_interrupt:
-  //     identify dark or light_interrupt
-  //     pushback to queue with message type logger, data loggerdata
-  //
-  // case error:
-  //     pushback to queue (not yours!!!)
-  //
-  // case logger:
-  //     pushback to queue (not yours!!!)
-  //
-  // default:
-  //
-  //     pushback to queue (not yours!!!)
-  //     
-  printf("\n process thread \n");
+
+ while(1){
+   printf("\n waiting on process_mq \n");
+    if((nbytes = mq_receive(proc_mq,(char*)&sensor_recv, MAX_MSG_SIZE, &prio)) == ERROR)
+    {
+      perror("mq_receive");
+    }
+    else
+    {
+      printf("processed info received: msg type: %d, sensor: %d data: %f datareceived with priority = %d, length = %d\n",
+           sensor_recv.type,sensor_recv.sensor,sensor_recv.data.lightData, prio, nbytes);
+
+      if(sensor_recv.sensor == LIGHT){
+        memset(&sensor_recv,0,sizeof(sensor_recv));
+        gettimeofday(&tv,NULL);
+        sensor_recv.sensor = LIGHT;
+        sensor_recv.timestamp = tv.tv_sec;
+        sensor_recv.status = GOOD;
+        sensor_recv.data.lightData = 15;
+
+        if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
+       // if((nbytes = mq_send(temp_mq, proc_msg, 13, 30)) == ERROR)
+         {
+           perror("mq_send");
+         }
+         else
+         {
+           printf("3_L. process thread sending processed light to logmq: %d bytes: message successfully sent\n", nbytes);
+         }
+      }
+      else if(sensor_recv.sensor == TEMPERATURE){
+        memset(&sensor_recv,0,sizeof(sensor_recv));
+        gettimeofday(&tv,NULL);
+        sensor_recv.sensor = TEMPERATURE;
+        sensor_recv.timestamp = tv.tv_sec;
+        sensor_recv.status = GOOD;
+        sensor_recv.data.temperatureData = 70;
+
+        if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
+       // if((nbytes = mq_send(temp_mq, proc_msg, 13, 30)) == ERROR)
+         {
+           perror("mq_send");
+         }
+         else
+         {
+           printf("3_T. process thread sending processed temperature to logmq: %d bytes: message successfully sent\n", nbytes);
+         }
+
+      }
+
+    }
+
+}
 }
