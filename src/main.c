@@ -18,6 +18,20 @@ int main (int argc, char *argv[])
 
   sem_init(&lightSem,0,0);
   sem_init(&tempSem,0,0);
+  sem_init(&procSem,0,0);
+  sem_init(&logSem,0,0);
+  sem_init(&sensor_finish_sem,0,2);
+
+  /* setup common message q attributes */
+  mq_attr.mq_maxmsg = 20;
+  mq_attr.mq_msgsize = MAX_MSG_SIZE;
+  mq_attr.mq_flags = 0;
+
+  temp_mq = mq_open(SNDRCV_MQ3, O_CREAT|O_RDWR, S_IRWXU, &mq_attr);
+  light_mq = mq_open(SNDRCV_MQ4, O_CREAT|O_RDWR, S_IRWXU, &mq_attr);
+  proc_mq = mq_open(SNDRCV_MQ5, O_CREAT|O_RDWR, S_IRWXU, &mq_attr);
+  log_mq = mq_open(SNDRCV_MQ6, O_CREAT|O_RDWR, S_IRWXU, &mq_attr);
+
 
   mainpid=getpid();
 
@@ -51,6 +65,7 @@ int main (int argc, char *argv[])
 /*********************************************************************************/
   //initializeSensors();
   // Open msg queue and send loggerdata message
+  signal(SIGINT, int_handler);
 /*********************************************************************************/
 
 	//Thread creation
@@ -61,21 +76,21 @@ int main (int argc, char *argv[])
 		);
 
   pthread_create(&threads[1],   // pointer to thread descriptor
-		 &rt_sched_attr[1],     // use default attributes
+		 &rt_sched_attr[0],     // use default attributes
 		 temperatureThread, // thread function entry point
 		 (void *)&(threadParams[1]) // parameters to pass in		//Cant pass nothing so just pass a number
-		);
-
-  pthread_create(&threads[3],   // pointer to thread descriptor
-		 &rt_sched_attr[3],     // use default attributes
-		 loggerThread, // thread function entry point
-		 (void *)&(threadParams[3]) // parameters to pass in		//Cant pass nothing so just pass a number
 		);
 
   pthread_create(&threads[2],   // pointer to thread descriptor
 		 &rt_sched_attr[2],     // use default attributes
 		 processorThread, // thread function entry point
 		 (void *)&(threadParams[2]) // parameters to pass in		//Cant pass nothing so just pass a number
+		);
+
+  pthread_create(&threads[3],   // pointer to thread descriptor
+		 &rt_sched_attr[3],     // use default attributes
+		 loggerThread, // thread function entry point
+		 (void *)&(threadParams[3]) // parameters to pass in		//Cant pass nothing so just pass a number
 		);
 
   pthread_create(&threads[4],   // pointer to thread descriptor
