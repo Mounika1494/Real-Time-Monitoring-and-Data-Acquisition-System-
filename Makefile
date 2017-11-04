@@ -23,4 +23,4 @@ $(OBJ)/%.o: $(SRC)/%.c
 .PHONY: clean
 
 clean:
-	rm -f $(OBJ)/*.o $(TARGET)
+	rm -f $(OBJ)/*.o $(TARGET) logger.txt
