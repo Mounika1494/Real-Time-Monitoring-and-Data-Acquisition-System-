@@ -56,6 +56,7 @@ int8_t write_one_byte(int *fileHandle, uint8_t reg, uint8_t data){
 }
 
 
+
 int8_t read_one_byte(int *fileHandle, uint8_t reg, uint8_t *data){
 
     //uint8_t command_byte = (0x80|reg );//commandbyte|reg address
