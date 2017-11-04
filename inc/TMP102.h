@@ -1,2 +1,6 @@
 #define TMP102_ADDR 0x48
-#define TEMPERATURE_REG 0x0
+#define TEMPERATURE_REG 0x00
+#define CONFIG_REG 0x01
+#define THRESH_LOW 0x02
+#define THRESH_HIGH 0x03
+#define TMP102_ADDR 0x48
