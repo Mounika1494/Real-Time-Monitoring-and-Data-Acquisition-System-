@@ -16,11 +16,6 @@ int main (int argc, char *argv[])
   pthread_attr_t main_attr;
   pid_t mainpid;
 
-  sem_init(&lightSem,0,0);
-  sem_init(&tempSem,0,0);
-  sem_init(&procSem,0,0);
-  sem_init(&logSem,0,0);
-  sem_init(&sensor_finish_sem,0,2);
 
   /* setup common message q attributes */
   mq_attr.mq_maxmsg = 20;
