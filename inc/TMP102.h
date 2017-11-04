@@ -1,0 +1,2 @@
+#define TMP102_ADDR 0x48
+#define TEMPERATURE_REG 0x0
