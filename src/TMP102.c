@@ -1,10 +1,10 @@
 
-#include "i2c.h"
+#include "../inc/i2c.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <math.h>
-#include "TMP102.h"
+#include "../inc/TMP102.h"
 
 int file_TMP102;
 char *filename = "/dev/i2c-2";
@@ -27,6 +27,8 @@ int8_t read_temperature(float_t *data)
     return FAIL;
     else
     {
+    	if(read_data == 0)
+    	return FAIL;
     	 digital_temp = ((uint8_t)read_data<<4| read_data>>12);
     	 if(digital_temp > 0x7FF)
 	     {

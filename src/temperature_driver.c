@@ -63,7 +63,7 @@ void *temperatureThread(void *threadp)
       }
         
         read_temperature(&data);
-        if(data > 25)
+        if(data > 25)// If temperature is greater than 25C then query light about its state
         {
          sensor_recv.type = QUERY_QUEUE; 
          if((nbytes = mq_send(light_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)

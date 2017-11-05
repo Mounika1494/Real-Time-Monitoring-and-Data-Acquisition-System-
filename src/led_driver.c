@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include <unistd.h>
 #include <stdint.h>
+#include "led_driver.h"
 
 //blink led with frequency given
 uint8_t blink_led(uint16_t period){
@@ -13,14 +14,14 @@ uint8_t blink_led(uint16_t period){
 		fclose(LEDHandle);
 	}
 	else
-	return ERROR;
+	return ERROR_L;
  	usleep(period);
  	if((LEDHandle = fopen(LEDBrightness,"r+")) != NULL){
  		fwrite("0",sizeof(char),1,LEDHandle);
  		fclose(LEDHandle);
  		}
  	else
- 	return ERROR;
+ 	return ERROR_L;
 	}
 	return BLINK;
 }

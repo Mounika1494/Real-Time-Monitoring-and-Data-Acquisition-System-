@@ -1,4 +1,4 @@
-#include "i2c.h"
+#include "../inc/i2c.h"
 #include <stdint.h>
 #include <pthread.h>
 #include <errno.h>
@@ -40,7 +40,10 @@ int8_t i2c_init(int *fileHandle, char *filename, uint8_t slaveAddress){
 //write one byte into the register
 int8_t write_one_byte(int *fileHandle, uint8_t reg, uint8_t data){
 
-   
+  if(*fileHandle ==0)
+  {
+    return fail;
+  }
   pthread_mutex_lock(&i2c_mutex);
   if (write(*fileHandle, &reg, 1) != 1) {
   	perror("Write error: ");
@@ -59,7 +62,15 @@ int8_t write_one_byte(int *fileHandle, uint8_t reg, uint8_t data){
 
 //read one byte from the register
 int8_t read_one_byte(int *fileHandle, uint8_t reg, uint8_t *data){
-
+  
+  if(*fileHandle ==0)
+  {
+    return fail;
+  }
+  if(data == NULL)
+  {
+    return fail;
+  }
   pthread_mutex_lock(&i2c_mutex);
   if (write(*fileHandle, &reg, 1) != 1) {
 		perror("Write error:");
@@ -80,6 +91,14 @@ int8_t read_one_byte(int *fileHandle, uint8_t reg, uint8_t *data){
 int8_t read_two_byte(int *fileHandle, uint8_t reg, uint16_t *data){
 
   pthread_mutex_lock(&i2c_mutex);
+  if(*fileHandle ==0)
+  {
+    return fail;
+  }
+  if(data == NULL)
+  {
+    return fail;
+  }
   if (write(*fileHandle, &reg, 1) != 1) {
 		perror("Write error:");
     return fail;
@@ -98,6 +117,14 @@ int8_t read_two_byte(int *fileHandle, uint8_t reg, uint16_t *data){
 //write 2 bytes to a register-16 bit
 int8_t write_two_byte(int *file,uint8_t* data)
 {
+    if(*file ==0)
+    {
+      return fail;
+    }
+    if(data == NULL)
+    {
+      return fail;
+    }  
     pthread_mutex_lock(&i2c_mutex);
     if(write(*file, data, 3)!=3)
     {

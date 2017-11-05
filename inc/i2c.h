@@ -81,6 +81,16 @@ extern int8_t read_one_byte(int *file, uint8_t reg, uint8_t *data);
 */
 extern int8_t read_two_byte(int *file, uint8_t reg, uint16_t *data);
 
+/***
+* @brief Reading two byte of data from given address
+*
+*
+*@param file - file handle for communication to the respective slave
+*       data - buffer with register 
+*
+*@return int8_t fail - any error in connecting to the device
+*               success - writing successfull 
+*/
 extern int8_t write_two_byte(int *file,uint8_t* data);
 
 #endif

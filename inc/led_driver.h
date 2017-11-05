@@ -22,7 +22,7 @@
 
 typedef enum{
   BLINK = 1,
-  ERROR
+  ERROR_L
 }return_type_t;
 /***
 * @brief read threshold high register for interrupt
