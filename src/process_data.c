@@ -39,12 +39,12 @@ void *processorThread(void *threadp)
          }
       }
       else if(sensor_recv.sensor == TEMPERATURE){
-        memset(&sensor_recv,0,sizeof(sensor_recv));
+        //memset(&sensor_recv,0,sizeof(sensor_recv));
         gettimeofday(&tv,NULL);
         sensor_recv.sensor = TEMPERATURE;
         sensor_recv.timestamp = tv.tv_sec;
         sensor_recv.status = GOOD;
-        sensor_recv.data.temperatureData = 70;
+        sensor_recv.data.temperatureData = sensor_recv.data.temperatureData;
 
         if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
        // if((nbytes = mq_send(temp_mq, proc_msg, 13, 30)) == ERROR)

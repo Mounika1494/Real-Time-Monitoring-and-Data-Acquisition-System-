@@ -56,6 +56,7 @@ int8_t write_one_byte(int *fileHandle, uint8_t reg, uint8_t data){
 }
 
 
+
 int8_t read_one_byte(int *fileHandle, uint8_t reg, uint8_t *data){
 
     //uint8_t command_byte = (0x80|reg );//commandbyte|reg address
@@ -77,7 +78,6 @@ int8_t read_one_byte(int *fileHandle, uint8_t reg, uint8_t *data){
 
 int8_t read_two_byte(int *fileHandle, uint8_t reg, uint16_t *data){
 
-  //  uint8_t command_byte = (0x80|0x20|reg );//commandbyte|reg address
   pthread_mutex_lock(&i2c_mutex);
   if (write(*fileHandle, &reg, 1) != 1) {
 		perror("Write error:");
@@ -87,8 +87,21 @@ int8_t read_two_byte(int *fileHandle, uint8_t reg, uint16_t *data){
 		perror("Read error:");
     return FAIL;
 	}
-	//printf("reg val is: %d\n", *data );
   pthread_mutex_unlock(&i2c_mutex);
   pthread_mutex_destroy(&i2c_mutex);
   return SUCCESS;
+}
+
+
+int8_t write_two_byte(int *file,uint8_t* data)
+{
+    pthread_mutex_lock(&i2c_mutex);
+    if(write(*file, data, 3)!=3)
+    {
+        perror("write word failed\n");
+        return FAIL;
+    }
+    pthread_mutex_unlock(&i2c_mutex);
+    pthread_mutex_destroy(&i2c_mutex);
+    return SUCCESS;
 }
