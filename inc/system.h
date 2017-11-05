@@ -18,7 +18,7 @@
 
 #define NUM_THREADS 5
 #define POSIX_QUEUE
-#define MAX_SIZE 20
+#define MAX_SIZE 50
 
 typedef struct
 {
@@ -36,7 +36,8 @@ typedef union{
 
 typedef enum{
   PROCESS_QUEUE =  1,
-  QUERY_QUEUE
+  QUERY_QUEUE,
+  LOG_FILE
 }destination_t;
 
 typedef enum{

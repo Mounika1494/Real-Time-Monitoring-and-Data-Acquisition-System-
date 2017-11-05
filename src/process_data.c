@@ -26,7 +26,7 @@ void *processorThread(void *threadp)
         sensor_recv.sensor = LIGHT;
         sensor_recv.timestamp = tv.tv_sec;
         sensor_recv.status = GOOD;
-        sensor_recv.data.lightData = 15;
+        sensor_recv.data.lightData = sensor_recv.data.lightData;
 
         if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
        // if((nbytes = mq_send(temp_mq, proc_msg, 13, 30)) == ERROR)
