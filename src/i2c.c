@@ -9,9 +9,10 @@
 #include <sys/ioctl.h>
 #include <fcntl.h>
 
-
+//mutex lock so that the i2c functions are nor pre- empted
 static pthread_mutex_t i2c_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+//initialise i2c for a slave
 int8_t i2c_init(int *fileHandle, char *filename, uint8_t slaveAddress){
 
   //char *filename = "/dev/i2c-2";
@@ -36,10 +37,10 @@ int8_t i2c_init(int *fileHandle, char *filename, uint8_t slaveAddress){
   return success;
 }
 
-
+//write one byte into the register
 int8_t write_one_byte(int *fileHandle, uint8_t reg, uint8_t data){
 
-    //uint8_t command_byte = (0x80|reg );// command|no idea|register address
+   
   pthread_mutex_lock(&i2c_mutex);
   if (write(*fileHandle, &reg, 1) != 1) {
   	perror("Write error: ");
@@ -56,10 +57,9 @@ int8_t write_one_byte(int *fileHandle, uint8_t reg, uint8_t data){
 }
 
 
-
+//read one byte from the register
 int8_t read_one_byte(int *fileHandle, uint8_t reg, uint8_t *data){
 
-    //uint8_t command_byte = (0x80|reg );//commandbyte|reg address
   pthread_mutex_lock(&i2c_mutex);
   if (write(*fileHandle, &reg, 1) != 1) {
 		perror("Write error:");
@@ -76,8 +76,8 @@ int8_t read_one_byte(int *fileHandle, uint8_t reg, uint8_t *data){
 }
 
 
+//read 2 bytes from a register(16 -bit)
 int8_t read_two_byte(int *fileHandle, uint8_t reg, uint16_t *data){
-
 
   pthread_mutex_lock(&i2c_mutex);
   if (write(*fileHandle, &reg, 1) != 1) {
@@ -95,6 +95,7 @@ int8_t read_two_byte(int *fileHandle, uint8_t reg, uint16_t *data){
 }
 
 
+//write 2 bytes to a register-16 bit
 int8_t write_two_byte(int *file,uint8_t* data)
 {
     pthread_mutex_lock(&i2c_mutex);

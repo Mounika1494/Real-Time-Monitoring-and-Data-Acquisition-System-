@@ -9,6 +9,7 @@
 int file_TMP102;
 char *filename = "/dev/i2c-2";
 
+//TMP102 initialsation
 int8_t TMP102_init()
 {
     if(i2c_init(&file_TMP102,filename,TMP102_ADDR) == fail)
@@ -17,6 +18,7 @@ int8_t TMP102_init()
     return SUCCESS;
 }
 
+//read temperature from temp_reg
 int8_t read_temperature(float_t *data)
 {
     uint16_t read_data = 0;
@@ -36,6 +38,7 @@ int8_t read_temperature(float_t *data)
    
 }
 
+//enter into SD mode by writing to CONF_REG
 int8_t enter_power_save_mode()
 {
     uint8_t *buf = malloc(sizeof(uint8_t)*3);
@@ -59,7 +62,7 @@ int8_t enter_power_save_mode()
 	
 }
 
-
+//wakeup from SD mode to read temperature
 int8_t wakeup_power_save_mode()
 {
     uint8_t *buf = malloc(sizeof(uint8_t)*3);
@@ -83,18 +86,21 @@ int8_t wakeup_power_save_mode()
 	
 }
 
+//Convert to Faranheit
 float_t temperature_F(float_t data)
 {
 	data = (data)*9.0/5.0 + 32.0;
 	return data;
 }
 
+//Convert to Kelvin
 float_t temperature_K(float_t data)
 {
 	data = (data)+273;
 	return data;
 }
 
+//Set TLOW for interrupt
 int8_t set_TLOW(uint16_t value){
 	
 	uint8_t *buf = malloc(sizeof(uint8_t)*3);
@@ -118,6 +124,7 @@ int8_t set_TLOW(uint16_t value){
 
 }
 
+//set THIGH for interrupt
 int8_t set_THIGH(uint16_t value){
 	
 	uint8_t *buf = malloc(sizeof(uint8_t)*3);

@@ -19,5 +19,14 @@
 */
 #ifndef _DATETIME_SERVICE_H
 #define _DATETIME_SERVICE_H
+
+/***
+* @brief Get date and time in exact format
+*
+*
+*@param NULL
+* 
+*@return date and time in string
+*/
 extern char* getDateString();
 #endif

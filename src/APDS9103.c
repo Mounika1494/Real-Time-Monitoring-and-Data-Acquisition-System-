@@ -5,6 +5,7 @@
 int file_APDS9301;
 char *file = "/dev/i2c-2";
 
+//initialise the sensors
 int8_t APDS9301_init()
 {
     if(i2c_init(&file_APDS9301,file,APDS9301_ADDR) == fail)
@@ -13,6 +14,7 @@ int8_t APDS9301_init()
     return SUCCESS;
 }
 
+//read ADC value from Channel 0
 int8_t read_light_CH0(float_t *data)
 {
     uint16_t read_data = 0;
@@ -26,6 +28,7 @@ int8_t read_light_CH0(float_t *data)
     }
 }
 
+//read ADC value from Channel 1
 int8_t read_light_CH1(float_t *data)
 {
     uint16_t read_data = 0;
@@ -38,6 +41,7 @@ int8_t read_light_CH1(float_t *data)
     }
 }
 
+//power on sensor
 int8_t APDS9301_poweron()
 {
     if(write_one_byte(&file_APDS9301, CMD_REG|CNTL_REG_ADDR , POWER_ON) == fail)
@@ -46,6 +50,7 @@ int8_t APDS9301_poweron()
     return SUCCESS;
 }
 
+//power of the sensor
 int8_t APDS9301_powerof()
 {
     /*if(write_one_byte(&file_APDS9301, CMD_REG|CNTL_REG_ADDR , POWER_OFF) == fail)*/
@@ -55,7 +60,7 @@ int8_t APDS9301_powerof()
     return SUCCESS;
 }
 
-
+//set the TLOW for interrupt
 int8_t set_thresh_low(uint16_t value)
 {
     uint8_t *buf = malloc(sizeof(uint8_t)*3);
@@ -78,6 +83,7 @@ int8_t set_thresh_low(uint16_t value)
 	}
 }
 
+//read the TLOW
 int8_t read_thresh_low(uint16_t *value)
 {
 
@@ -94,6 +100,7 @@ int8_t read_thresh_low(uint16_t *value)
 	}
 }
 
+//set the THIGH for interrupt
 int8_t set_thresh_high(uint16_t value)
 {
     uint8_t *buf = malloc(sizeof(uint8_t)*3);
@@ -116,6 +123,7 @@ int8_t set_thresh_high(uint16_t value)
 	}
 }
 
+//read the THIGH register
 int8_t read_thresh_high(uint16_t *value)
 {
 
@@ -132,6 +140,7 @@ int8_t read_thresh_high(uint16_t *value)
 	}
 }
 
+//Calcualte the luminosity with ADC channel values
 float_t cal_luminosity(float_t data_CH0,float_t data_CH1)
 {
 	float ratio = 0;

@@ -14,18 +14,15 @@
 
 #define APDS9301_ADDR 0x39
 
-
+//thread handler for light thread
 void *lightThread(void *threadp)
 {
   int nbytes,prio;
   message_t sensor_recv;
-  //int file_APDS9301;
-  //char *filename = "/dev/i2c-2";
   float_t data_CH0;
   float_t data_CH1;
   APDS9301_init();
   float_t luminosity = 0;
-  //i2c_init(&file_APDS9301,filename,APDS9301_ADDR);
   if(APDS9301_poweron() == SUCCESS){
     sprintf(sensor_recv.data.loggerData,"%s","DEBUG INFO: Light sensor initialization success\n"); 
     sensor_recv.status = GOOD; 

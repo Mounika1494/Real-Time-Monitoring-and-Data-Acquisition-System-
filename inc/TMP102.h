@@ -17,6 +17,25 @@
 * @version 1.0
 *
 */
+/**********************************************************************************************************
+* Copyright (C) 2017 by Mounika Reddy Edula
+*
+*Redistribution,modification or use of this software in source or binary fors is permitted as long 
+*as the files maintain this copyright.Mounika Reddy Edula is not liable for any misuse of this material
+*
+*********************************************************************************************************/
+/**
+* @file TMP102.h
+* @brief driver to setup the sensor
+*
+*This header file provides functions to initialise i2c,write one byte,read one byte,read two byte
+*
+* @author Mounika Reddy Edula
+* @       Jay Krishnan
+* @date September 11/4/2017
+* @version 1.0
+*
+*/
 #ifndef _TMP102_H
 #define _TMP102_H
 
@@ -40,12 +59,10 @@ enum return_t{
 
 
 /***
-* @brief Initialises the i2c driver for a slave address
+* @brief Initialises the sensor APDS9301
 *
 *
-*@param fileHandle - file handle for that slave used for rest communication
-*       filename -   pointer for the specific i2c-2/i2c-1
-*       slaveAddress - address of the slave you want to communicate
+*@param NONE
 *
 *@return int8_t fail - any error in connecting to the device
 *               success - successfull initialisation
@@ -53,25 +70,21 @@ enum return_t{
 extern int8_t TMP102_init();
 
 /***
-* @brief Writing one byte of data to the given address
+* @brief read temperature from TEMP_REG
 *
 *
-*@param file - file handle for communication to the respective slave
-*       reg - Address of the Register
-*       byte - data you want to write
+*@param pointer to store data
 *
 *@return int8_t fail - any error in connecting to the device
-*               success - writing successfull 
+*               success - successfull initialisation
 */
 extern int8_t read_temperature(float_t *data);
 
 /***
-* @brief Writing one byte of data to the given address
+* @brief enter into SD mode with CONF_REG
 *
 *
-*@param file - file handle for communication to the respective slave
-*       reg - Address of the Register
-*       byte - data you want to write
+*@param NONE
 *
 *@return int8_t fail - any error in connecting to the device
 *               success - writing successfull 
@@ -79,12 +92,10 @@ extern int8_t read_temperature(float_t *data);
 extern int8_t enter_power_save_mode();
 
 /***
-* @brief Writing one byte of data to the given address
+* @brief wake up from SD mode for reading temperature
 *
 *
-*@param file - file handle for communication to the respective slave
-*       reg - Address of the Register
-*       byte - data you want to write
+*@param NONE
 *
 *@return int8_t fail - any error in connecting to the device
 *               success - writing successfull 
@@ -92,54 +103,46 @@ extern int8_t enter_power_save_mode();
 extern int8_t wakeup_power_save_mode();
 
 /***
-* @brief Writing one byte of data to the given address
+* @brief convert into F
 *
 *
-*@param file - file handle for communication to the respective slave
-*       reg - Address of the Register
-*       byte - data you want to write
+*@param temperature in C
 *
-*@return int8_t fail - any error in connecting to the device
-*               success - writing successfull 
+*@return temperature in F
+* 
 */
 extern float_t temperature_F(float_t data);
 
 /***
-* @brief Writing one byte of data to the given address
+* @brief convert into K
 *
 *
-*@param file - file handle for communication to the respective slave
-*       reg - Address of the Register
-*       byte - data you want to write
+*@param temperature in C
 *
-*@return int8_t fail - any error in connecting to the device
-*               success - writing successfull 
+*@return temperature in K
+* 
 */
 extern float_t temperature_K(float_t data);
 
 /***
-* @brief Writing one byte of data to the given address
+* @brief Set threshold low register for interrupt
 *
 *
-*@param file - file handle for communication to the respective slave
-*       reg - Address of the Register
-*       byte - data you want to write
-*
+*@param value to be written to register
+* 
 *@return int8_t fail - any error in connecting to the device
-*               success - writing successfull 
+*               success - successfull initialisation
 */
 extern int8_t set_TLOW(uint16_t value);
 
 /***
-* @brief Writing one byte of data to the given address
+* @brief Set threshold high register for interrupt
 *
 *
-*@param file - file handle for communication to the respective slave
-*       reg - Address of the Register
-*       byte - data you want to write
-*
+*@param value to be written to register
+* 
 *@return int8_t fail - any error in connecting to the device
-*               success - writing successfull 
+*               success - successfull initialisation
 */
 extern int8_t set_THIGH(uint16_t value);
 #endif

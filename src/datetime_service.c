@@ -3,6 +3,7 @@
 #include <time.h>
 #include "datetime_service.h"
 
+//get date and time in proper format for logger
 char* getDateString() {
     // Initialize and get current time
     time_t t = time( NULL );

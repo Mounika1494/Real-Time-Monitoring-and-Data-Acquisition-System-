@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <stdint.h>
 
+//blink led with frequency given
 uint8_t blink_led(uint16_t period){
 	FILE* LEDHandle = NULL;
 	const char *LEDBrightness = "/sys/class/leds/beaglebone:green:usr0/brightness";
@@ -11,11 +12,15 @@ uint8_t blink_led(uint16_t period){
 		fwrite("1",sizeof(char),1,LEDHandle);
 		fclose(LEDHandle);
 	}
+	else
+	return ERROR;
  	usleep(period);
  	if((LEDHandle = fopen(LEDBrightness,"r+")) != NULL){
  		fwrite("0",sizeof(char),1,LEDHandle);
  		fclose(LEDHandle);
  		}
+ 	else
+ 	return ERROR;
 	}
-	return 0;
+	return BLINK;
 }

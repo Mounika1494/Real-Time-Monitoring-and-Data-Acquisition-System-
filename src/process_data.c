@@ -4,6 +4,8 @@
 #include "TMP102.h"
 #include "datetime_service.h"
 
+
+//process thread handler
 void *processorThread(void *threadp)
 {
   int nbytes,prio;
@@ -21,13 +23,13 @@ void *processorThread(void *threadp)
       printf("processed info received: msg type: %d, sensor: %d data: %f datareceived with priority = %d, length = %d\n",
            sensor_recv.type,sensor_recv.sensor,sensor_recv.data.lightData, prio, nbytes);
 
-      if(sensor_recv.sensor == LIGHT){
+      if(sensor_recv.sensor == LIGHT){//if light data is recieved
         sensor_recv.type = PROCESS_QUEUE;
         sensor_recv.sensor = LIGHT;
         sprintf(sensor_recv.timestamp,"%s",getDateString());
         sensor_recv.status = GOOD;
         sensor_recv.data.lightData = sensor_recv.data.lightData;
-        if(sensor_recv.data.lightData < 1)
+        if(sensor_recv.data.lightData < 1)//determine the state
             current_state = NIGHT;
         else
             current_state = DAY;
@@ -47,12 +49,12 @@ void *processorThread(void *threadp)
            printf("3_L. process thread sending processed light to logmq: %d bytes: message successfully sent\n", nbytes);
          }
       }
-      else if(sensor_recv.sensor == TEMPERATURE){
+      else if(sensor_recv.sensor == TEMPERATURE){//if sensor data is temperature
         sensor_recv.type = PROCESS_QUEUE;
         sensor_recv.sensor = TEMPERATURE;
         sprintf(sensor_recv.timestamp,"%s",getDateString());
         sensor_recv.status = GOOD;
-        sensor_recv.data.temperatureData = temperature_F(sensor_recv.data.temperatureData);
+        sensor_recv.data.temperatureData = temperature_F(sensor_recv.data.temperatureData);//convert to Faranheit
 
         if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
          {

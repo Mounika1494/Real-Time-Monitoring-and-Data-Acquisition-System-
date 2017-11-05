@@ -5,9 +5,10 @@
 
 static int i = 0;
 
+
+//On Ctrl+c the queues should be closed and unlinked as even though process is killed if
+//queue is still linked then the process enters into zombie state and data is retained
 void int_handler(){
-
-
   mq_close(temp_mq);
   mq_close(light_mq);
   mq_close(proc_mq);
@@ -18,9 +19,9 @@ void int_handler(){
   mq_unlink(SNDRCV_MQ6);
   printf("\n caught crl c \n");
   exit(0);
-
 }
 
+//Signal handler for timer
 void sighler (union sigval val){
   //printf("Handler entered with value :%d for %d times\n", val.sival_int, ++i);
   static int count;
@@ -70,6 +71,7 @@ void sighler (union sigval val){
   }
 }
 
+//thread handler for sequencer thread
 void *sequencerThread(void *threadp){
 
       
@@ -79,7 +81,6 @@ void *sequencerThread(void *threadp){
       struct timeval tv;
       message_t sensor_recv;
       int nbytes;
-      // printf("\n in timer \n");
     
       pthread_attr_t attr;
       pthread_attr_init( &attr );
