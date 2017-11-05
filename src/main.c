@@ -15,7 +15,17 @@ int main (int argc, char *argv[])
   //Scheduler declarations
   pthread_attr_t main_attr;
   pid_t mainpid;
-
+  data_file = malloc(sizeof(10));
+  logger_file =  malloc(sizeof(10));
+  
+  if (argc < 3)
+	{
+		printf("USAGE:  <data file> <logger file>\n");
+		exit(1);
+	}
+	
+	data_file = argv[1];
+  logger_file = argv[2];
 
 
   /* setup common message q attributes */

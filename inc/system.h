@@ -102,5 +102,6 @@ void *temperatureThread(void *threadp);
 void *loggerThread(void *threadp);
 void *sequencerThread(void *threadp);
 void *processorThread(void *threadp);
-
+char *data_file;
+char *logger_file;
 #endif

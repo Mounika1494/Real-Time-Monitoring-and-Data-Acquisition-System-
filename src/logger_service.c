@@ -16,7 +16,7 @@ void *loggerThread(void *threadp)
   uint8_t previous_state = 0;
 
  while(1){
-   fp_data = fopen("data.txt", "a");
+   fp_data = fopen(data_file, "a");
   if(fp_data == NULL)
   {
     printf("Couldn't log data %d\n",FILE_ERROR);
