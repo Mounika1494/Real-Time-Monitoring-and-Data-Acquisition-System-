@@ -91,5 +91,55 @@ extern int8_t enter_power_save_mode();
 */
 extern int8_t wakeup_power_save_mode();
 
+/***
+* @brief Writing one byte of data to the given address
+*
+*
+*@param file - file handle for communication to the respective slave
+*       reg - Address of the Register
+*       byte - data you want to write
+*
+*@return int8_t fail - any error in connecting to the device
+*               success - writing successfull 
+*/
+extern float_t temperature_F(float_t data);
 
+/***
+* @brief Writing one byte of data to the given address
+*
+*
+*@param file - file handle for communication to the respective slave
+*       reg - Address of the Register
+*       byte - data you want to write
+*
+*@return int8_t fail - any error in connecting to the device
+*               success - writing successfull 
+*/
+extern float_t temperature_K(float_t data);
+
+/***
+* @brief Writing one byte of data to the given address
+*
+*
+*@param file - file handle for communication to the respective slave
+*       reg - Address of the Register
+*       byte - data you want to write
+*
+*@return int8_t fail - any error in connecting to the device
+*               success - writing successfull 
+*/
+extern int8_t set_TLOW(uint16_t value);
+
+/***
+* @brief Writing one byte of data to the given address
+*
+*
+*@param file - file handle for communication to the respective slave
+*       reg - Address of the Register
+*       byte - data you want to write
+*
+*@return int8_t fail - any error in connecting to the device
+*               success - writing successfull 
+*/
+extern int8_t set_THIGH(uint16_t value);
 #endif

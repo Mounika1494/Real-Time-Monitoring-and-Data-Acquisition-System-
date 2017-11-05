@@ -20,11 +20,17 @@ int8_t TMP102_init()
 int8_t read_temperature(float_t *data)
 {
     uint16_t read_data = 0;
+    uint16_t digital_temp = 0;
     if(read_two_byte(&file_TMP102,TEMPERATURE_REG,&read_data) == fail)
     return FAIL;
     else
     {
-        *data = (float_t)(((uint8_t)read_data<<4| read_data>>12)*RESOLUTION);
+    	 digital_temp = ((uint8_t)read_data<<4| read_data>>12);
+    	 if(digital_temp > 0x7FF)
+	     {
+            digital_temp |= 0xF000;
+         }
+        *data = (float_t)(digital_temp*RESOLUTION);
          return SUCCESS;
     }
    
@@ -63,6 +69,63 @@ int8_t wakeup_power_save_mode()
 	buf[2]=0b10100000;
 	buf[1]=0b01100000;
 	
+	if(write_two_byte(&file_TMP102,&buf[0]) == fail)
+	{
+	    free(buf);
+	    return FAIL;
+	}
+	
+	else
+	{
+	    free(buf);
+	    return SUCCESS;
+	}
+	
+}
+
+float_t temperature_F(float_t data)
+{
+	data = (data)*9.0/5.0 + 32.0;
+	return data;
+}
+
+float_t temperature_K(float_t data)
+{
+	data = (data)+273;
+	return data;
+}
+
+int8_t set_TLOW(uint16_t value){
+	
+	uint8_t *buf = malloc(sizeof(uint8_t)*3);
+    if(buf == NULL)
+    return FAIL;
+	buf[0]= THRESH_LOW;
+	buf[2]= (value >> 8) & 0xff; 
+	buf[1]= value & 0xff;
+	if(write_two_byte(&file_TMP102,&buf[0]) == fail)
+	{
+	    free(buf);
+	    return FAIL;
+	}
+	
+	else
+	{
+	    free(buf);
+	    return SUCCESS;
+	}
+	
+
+}
+
+int8_t set_THIGH(uint16_t value){
+	
+	uint8_t *buf = malloc(sizeof(uint8_t)*3);
+    if(buf == NULL)
+    return FAIL;
+	buf[0]= THRESH_HIGH;
+	buf[2]= (value >> 8) & 0xff; 
+	buf[1]= value & 0xff;
 	if(write_two_byte(&file_TMP102,&buf[0]) == fail)
 	{
 	    free(buf);

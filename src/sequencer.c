@@ -66,7 +66,7 @@ void sighler (union sigval val){
     
     case 3:
        printf("***triggered heartbeat****\n");
-       //blink_led("1");
+       blink_led(1000);
        count = 0;
   }
 }

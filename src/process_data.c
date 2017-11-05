@@ -1,7 +1,7 @@
 #include "system.h"
 #include "sequencer.h"
 #include <sys/time.h>
-
+#include "TMP102.h"
 void *processorThread(void *threadp)
 {
   int nbytes,prio;
@@ -44,7 +44,7 @@ void *processorThread(void *threadp)
         sensor_recv.sensor = TEMPERATURE;
         sensor_recv.timestamp = tv.tv_sec;
         sensor_recv.status = GOOD;
-        sensor_recv.data.temperatureData = sensor_recv.data.temperatureData;
+        sensor_recv.data.temperatureData = temperature_F(sensor_recv.data.temperatureData);
 
         if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
        // if((nbytes = mq_send(temp_mq, proc_msg, 13, 30)) == ERROR)

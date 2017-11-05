@@ -22,7 +22,6 @@ int8_t i2c_init(int *fileHandle, char *filename, uint8_t slaveAddress){
       return fail;
   }
 
-  //int addr = 0b0111001;          // The I2C address of the ADC
   if (ioctl(*fileHandle, I2C_SLAVE, slaveAddress) < 0) {
 
       printf("Failed to acquire bus access and/or talk to slave.\n");

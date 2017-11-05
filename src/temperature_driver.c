@@ -34,7 +34,7 @@ void *temperatureThread(void *threadp)
     printf("Light: init for log file: %d bytes: message successfully sent\n", nbytes);
   }
   
- while(1){
+  while(1){
 
     printf("Waiting for temp_mq\n");
     if((nbytes = mq_receive(temp_mq, (char *)&sensor_recv, MAX_MSG_SIZE, &prio)) == ERROR)

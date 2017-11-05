@@ -55,7 +55,7 @@ void *loggerThread(void *threadp)
       }
       
       if (sensor_recv.status == BAD){
-        blink_led("1");
+        blink_led(10000);
         previous_state =1;
         
         
