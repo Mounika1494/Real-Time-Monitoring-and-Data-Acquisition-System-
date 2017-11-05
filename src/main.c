@@ -43,6 +43,7 @@ int main (int argc, char *argv[])
   if(log_mq == (mqd_t)ERROR){ 
      error_flag = 1; 
   }
+  
   if(error_flag == 1){
     printf("Error opening message queue\n");
     exit(-1);  

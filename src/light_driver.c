@@ -75,7 +75,39 @@ void *lightThread(void *threadp)
         sensor_recv.status = GOOD;
         sensor_recv.data.lightData = (float_t)data;
         printf("***************************\n lightdata: %f timestamp %lu\n",sensor_recv.data.lightData,sensor_recv.timestamp );
+        if(data>100)
+        {
+          sensor_recv.type = QUERY_QUEUE; 
+          if((nbytes = mq_send(temp_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
+           {
+             perror("mq_send");
+           }
+           else
+           {
+             printf("2_T. temp thread sending proc q: %d bytes: message successfully sent\n", nbytes);
+           }
+        }
+        else
+        {
         if((nbytes = mq_send(proc_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
+         {
+           perror("mq_send");
+         }
+         else
+         {
+           printf("2_L. light thread sending proc q: %d bytes: message successfully sent\n", nbytes);
+         }
+        }
+      }
+      else if(sensor_recv.type == QUERY_QUEUE)
+      {
+        sensor_recv.type = QUERY_QUEUE;
+        sensor_recv.sensor = LIGHT;
+        sprintf(sensor_recv.timestamp,"%s",getDateString());
+        sensor_recv.status = GOOD;
+        sensor_recv.data.lightData = (float_t)data;
+        printf("***************************\n lightdata: %f timestamp %lu\n",sensor_recv.data.lightData,sensor_recv.timestamp );
+        if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
          {
            perror("mq_send");
          }

@@ -22,6 +22,7 @@ void *processorThread(void *threadp)
            sensor_recv.type,sensor_recv.sensor,sensor_recv.data.lightData, prio, nbytes);
 
       if(sensor_recv.sensor == LIGHT){
+        sensor_recv.type = PROCESS_QUEUE;
         sensor_recv.sensor = LIGHT;
         sprintf(sensor_recv.timestamp,"%s",getDateString());
         sensor_recv.status = GOOD;
@@ -37,6 +38,7 @@ void *processorThread(void *threadp)
          }
       }
       else if(sensor_recv.sensor == TEMPERATURE){
+        sensor_recv.type = PROCESS_QUEUE;
         sensor_recv.sensor = TEMPERATURE;
         sprintf(sensor_recv.timestamp,"%s",getDateString());
         sensor_recv.status = GOOD;

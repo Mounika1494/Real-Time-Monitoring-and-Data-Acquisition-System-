@@ -19,7 +19,7 @@
 
 #define NUM_THREADS 5
 #define POSIX_QUEUE
-#define MAX_SIZE 50
+#define MAX_SIZE 60
 
 typedef struct
 {
@@ -57,8 +57,7 @@ typedef struct
   sensor_t sensor;
   status_t status;
   error_t error;
-  //time_t timestamp;
-  char timestamp[60];
+  char timestamp[40];
   data_t data;
 }message_t;
 

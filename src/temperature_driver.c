@@ -63,23 +63,68 @@ void *temperatureThread(void *threadp)
       }
         
         read_temperature(&data);
-        //gettimeofday(&tv,NULL);
+        if(data > 25)
+        {
+         sensor_recv.type = QUERY_QUEUE; 
+         if((nbytes = mq_send(light_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
+           {
+             perror("mq_send");
+           }
+           else
+           {
+             printf("2_T. temp thread sending proc q: %d bytes: message successfully sent\n", nbytes);
+           }
+        }
+        else
+        {
+          sensor_recv.sensor = TEMPERATURE;
+          sprintf(sensor_recv.timestamp,"%s",getDateString());
+          sensor_recv.status = GOOD;
+          sensor_recv.data.temperatureData = data;
+          if((nbytes = mq_send(proc_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
+           {
+             perror("mq_send");
+           }
+           else
+           {
+             printf("2_T. temp thread sending proc q: %d bytes: message successfully sent\n", nbytes);
+           }
+         }
+         enter_power_save_mode();
+      }
+      else if(sensor_recv.type == QUERY_QUEUE)
+      {
+          if (wakeup_power_save_mode()==FAIL){
+
+          sprintf(sensor_recv.data.loggerData,"%s","DEBUG ERROR:Temperature sensor read failed\n"); 
+          sensor_recv.status = BAD; 
+          sprintf(sensor_recv.timestamp,"%s",getDateString());
+          sensor_recv.type = LOG_FILE;
+          if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
+          {
+            perror("mq_send");
+          }
+          else
+          {
+            printf("Temerature: init for log file: %d bytes: message successfully sent\n", nbytes);
+          }  
+        }
+        sensor_recv.type = QUERY_QUEUE;
+        read_temperature(&data);
         sensor_recv.sensor = TEMPERATURE;
-        //sensor_recv.timestamp = tv.tv_sec;
         sprintf(sensor_recv.timestamp,"%s",getDateString());
         sensor_recv.status = GOOD;
         sensor_recv.data.temperatureData = data;
-
-        if((nbytes = mq_send(proc_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
-         {
-           perror("mq_send");
-         }
-         else
-         {
-           printf("2_T. temp thread sending proc q: %d bytes: message successfully sent\n", nbytes);
-         }
-         
-         enter_power_save_mode();
+        if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
+          {
+             perror("mq_send");
+          }
+          else
+          {
+             printf("2_T. temp thread sending proc q: %d bytes: message successfully sent\n", nbytes);
+          }
+        
+          enter_power_save_mode();
       }
 
     }

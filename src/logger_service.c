@@ -35,27 +35,44 @@ void *loggerThread(void *threadp)
     }
     else
     {
-      if(sensor_recv.sensor == LIGHT){
+      if (sensor_recv.type == QUERY_QUEUE) {
+
+        if(sensor_recv.sensor == LIGHT){
         
-        fprintf(fp_data, "%s Light is %f \n\n", sensor_recv.timestamp,sensor_recv.data.lightData);
+          fprintf(fp_data, "%s Queried Light is %f \n\n", sensor_recv.timestamp,sensor_recv.data.lightData);
+
+        }
+        else if (sensor_recv.sensor == TEMPERATURE){
+
+          fprintf(fp_data, "%s Queried Temperature is %f \n\n", sensor_recv.timestamp, sensor_recv.data.temperatureData);
+
+        }
 
       }
-      else if (sensor_recv.sensor == TEMPERATURE){
-
-        fprintf(fp_data, "%s Temperature is %f \n\n", sensor_recv.timestamp, sensor_recv.data.temperatureData);
+      if (sensor_recv.type == PROCESS_QUEUE) {
+        
+        if(sensor_recv.sensor == LIGHT){
+          
+          fprintf(fp_data, "%s Light is %f \n\n", sensor_recv.timestamp,sensor_recv.data.lightData);
+  
+        }
+        else if (sensor_recv.sensor == TEMPERATURE){
+  
+          fprintf(fp_data, "%s Temperature is %f \n\n", sensor_recv.timestamp, sensor_recv.data.temperatureData);
+  
+        }
 
       }
-      else if (sensor_recv.type == LOG_FILE) {
-
-        fprintf(fp_logger, "%s %s type: %d \n\n",sensor_recv.timestamp, sensor_recv.data.loggerData,sensor_recv.type);
-
-      }
+        else if (sensor_recv.type == LOG_FILE) {
+  
+          fprintf(fp_logger, "%s %s \n\n",sensor_recv.timestamp, sensor_recv.data.loggerData);
+  
+        }
+      
       
       if (sensor_recv.status == BAD){
         blink_led(10000);
         previous_state =1;
-        
-        
       }
       if(sensor_recv.status == GOOD)
       {
@@ -69,12 +86,8 @@ void *loggerThread(void *threadp)
           write_one_byte(&file_APDS9301, 0x80|0x00 , 0x03);
         }
       }
-      
-
     }
     fclose(fp_data);
     fclose(fp_logger);
 }
-
-
 }
