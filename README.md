@@ -31,7 +31,7 @@ Output generated will be RT_LOGGER. You should give file name where you want to 
 Note: You should run being a root or use sudo
 
 ```
-sudo ./RT_LOGGER
+sudo ./RT_LOGGER <path to sensor_data.txt> <path to logger.txt>
 ```
 
 ### Using
