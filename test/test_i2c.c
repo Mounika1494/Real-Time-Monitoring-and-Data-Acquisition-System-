@@ -15,6 +15,7 @@
 *pass null pointers, wrong slave address
 *
 *@Author:Mounika Reddy Edula
+*        Jay Krishanan
 *@Date: 09/19/2017
 *@Test Framework: CMocka
 *************************************************************************************/

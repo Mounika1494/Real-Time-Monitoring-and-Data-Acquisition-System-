@@ -7,12 +7,15 @@ CFLAGS	= $(INCLUDE_DIRS)
 
 LDFLAGS	= -L$(CMOCKA_DIR)/build/src -Wl,-rpath=$(CMOCKA_DIR)/build/src 
 #LDFLAGS += -Wl,--wrap=i2c_read_blocking -Wl,--wrap=i2c_transmit_blocking 
-LDFLAGS += -lcmocka
+LDFLAGS += -lcmocka -lm
 
-TARGET = test_TMP102
+TARGET = test_leddriver
 
-SRC = TMP102.c
-TEST_SRC = test_TMP102.c
+SRC = led_driver.c 
+TEST_SRC = test_leddriver.c
+
+
+
 
 SRC_OBJ = $(patsubst %.c,obj/%.o,$(SRC)) 
 TEST_OBJ = $(patsubst %.c,obj/%.o,$(TEST_SRC)) 

@@ -1,5 +1,5 @@
-#include "APDS9103.h"
-#include "i2c.h"
+#include "../inc/APDS9103.h"
+#include "../inc/i2c.h"
 #include <math.h>
 
 int file_APDS9301;

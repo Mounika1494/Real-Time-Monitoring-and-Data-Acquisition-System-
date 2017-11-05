@@ -9,18 +9,18 @@
 #include "../inc/i2c.h"
 
 /***********************************************************************************
-*@Filename:test_circbuffer.c
+*@Filename:test_TMP102.c
 *
-*@Description: Test cases using cmocka to test the boundary conditions for circular buffer
-*pass null pointers, loop back,removing elements,destroy
+*@Description: Test cases using cmocka to test the boundary conditions for TMP102 driver
+*pass null values
 *
 *@Author:Mounika Reddy Edula
+*        Jay Krishnan
 *@Date: 09/19/2017
 *@Test Framework: CMocka
 *************************************************************************************/
 
-//#define TEMPERATURE_REG 0x00
-/*Test the add_item functionality of circular buffer*/
+
 void test_TMP102_init(void **state)
 {
     int return_value;
@@ -30,12 +30,11 @@ void test_TMP102_init(void **state)
 
 void test_read_temperature(void **state)
 {
-    uint16_t data;
+    float_t data;
     int return_value;
     return_value = TMP102_init();
     assert_int_equal(return_value,SUCCESS);
     read_temperature(&data);
-    assert_int_equal(return_value,SUCCESS);
 }
 
 void test_enter_power_save_mode(void **state)
