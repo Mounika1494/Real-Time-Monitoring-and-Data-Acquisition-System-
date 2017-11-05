@@ -1,6 +1,7 @@
 #include "system.h"
 #include "sequencer.h"
 
+
 int main (int argc, char *argv[])
 {
 
@@ -10,13 +11,8 @@ int main (int argc, char *argv[])
   int8_t error_flag = 0;
   int8_t errorno = 0;
   pthread_t threads[NUM_THREADS];
-  struct timeval tv;
   message_t sensor_recv;
   //Scheduler declarations
-  pthread_attr_t rt_sched_attr[NUM_THREADS];
-  int rt_max_prio, rt_min_prio;
-  struct sched_param rt_param[NUM_THREADS];
-  struct sched_param main_param;
   pthread_attr_t main_attr;
   pid_t mainpid;
 
@@ -54,32 +50,8 @@ int main (int argc, char *argv[])
 
 
   mainpid=getpid();
-
-  /* Scheduler */
-
-  rc=sched_getparam(mainpid, &main_param);
-  if (rc)
-   {
-     printf("ERROR; sched_setscheduler rc is %d\n", rc);
-     perror(NULL);
-     exit(-1);
-   }
-   //Obtain the priorities of the scheduler
-//   rt_max_prio = sched_get_priority_max(SCHED_FIFO);
-//   rt_min_prio = sched_get_priority_min(SCHED_FIFO);
-
-//   main_param.sched_priority=rt_max_prio ;
-//   rc=sched_setscheduler(getpid(), SCHED_FIFO, &main_param);
-//   if(rc < 0) perror("main_param");
-
-
   for(i=0; i < NUM_THREADS; i++)
   {
-     rc=pthread_attr_init(&rt_sched_attr[i]);
-     rc=pthread_attr_setinheritsched(&rt_sched_attr[i], PTHREAD_EXPLICIT_SCHED);
-     rc=pthread_attr_setschedpolicy(&rt_sched_attr[i], SCHED_FIFO);
-     rt_param[i].sched_priority=rt_max_prio-i-1;
-     pthread_attr_setschedparam(&rt_sched_attr[i], &rt_param[i]);
      threadParams[i].threadIdx=i;
    }
 /*********************************************************************************/
@@ -135,14 +107,12 @@ int main (int argc, char *argv[])
 	if(error_flag == 1)
 	{
         error_flag = 0;
-        sprintf(sensor_recv.data.loggerData,"%s","pthread create error\n");
+        sprintf(sensor_recv.data.loggerData,"%s","DEBUG ERROR:pthread create error\n");
         sensor_recv.status = BAD;
         sensor_recv.error = errno;
-        gettimeofday(&tv,NULL);
-        sensor_recv.timestamp = tv.tv_sec;
+        sprintf(sensor_recv.timestamp,"%s",getDateString());
         sensor_recv.type = QUERY_QUEUE;
         if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
-           // if((nbytes = mq_send(temp_mq, proc_msg, 13, 30)) == ERROR)
         {
          perror("mq_send");
         }
@@ -153,11 +123,6 @@ int main (int argc, char *argv[])
         
 	}
 
-    //main_param.sched_priority=rt_max_prio - NUM_THREADS - 2;
-    //rc=sched_setscheduler(getpid(), SCHED_FIFO, &main_param);
-    //if(rc < 0) perror("main_param");
-
-//sequence//
 
 /*********************************************************************************/
  pthread_join(threads[4], NULL);

@@ -2,7 +2,7 @@
 #include "sequencer.h"
 #include <sys/time.h>
 #include "TMP102.h"
-
+#include "datetime_service.h"
 
 //Temperature thread which interacts with TMP102.c driver and logs into logger.txt any error and data into data.txt 
 void *temperatureThread(void *threadp)
@@ -10,22 +10,20 @@ void *temperatureThread(void *threadp)
 
   int nbytes,prio;
   message_t sensor_recv;
-  struct timeval tv;
   float_t data;
   TMP102_init();
   //change to write_2_byte
   if(1){
-    sprintf(sensor_recv.data.loggerData,"%s","Temperature sensor initialization success\n"); 
+    sprintf(sensor_recv.data.loggerData,"%s","DEBUG INFO: Temperature sensor initialization success\n"); 
     sensor_recv.status = GOOD; 
   }else{
-    sprintf(sensor_recv.data.loggerData,"%s","Temperature sensor initialization failed\n");
+    sprintf(sensor_recv.data.loggerData,"%s","DEBUG ERROR: Temperature sensor initialization failed\n");
     sensor_recv.status = BAD;
   }
-  gettimeofday(&tv,NULL);
-  sensor_recv.timestamp = tv.tv_sec;
+
+  sprintf(sensor_recv.timestamp,"%s",getDateString());
   sensor_recv.type = LOG_FILE;
   if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
-      // if((nbytes = mq_send(temp_mq, proc_msg, 13, 30)) == ERROR)
   {
     perror("mq_send");
   }
@@ -50,10 +48,9 @@ void *temperatureThread(void *threadp)
         
         if (wakeup_power_save_mode()==FAIL){
 
-          sprintf(sensor_recv.data.loggerData,"%s","Temperature sensor read failed\n"); 
+          sprintf(sensor_recv.data.loggerData,"%s","DEBUG ERROR:Temperature sensor read failed\n"); 
           sensor_recv.status = BAD; 
-          gettimeofday(&tv,NULL);
-          sensor_recv.timestamp = tv.tv_sec;
+          sprintf(sensor_recv.timestamp,"%s",getDateString());
           sensor_recv.type = LOG_FILE;
           if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
           {
@@ -66,14 +63,14 @@ void *temperatureThread(void *threadp)
       }
         
         read_temperature(&data);
-        gettimeofday(&tv,NULL);
+        //gettimeofday(&tv,NULL);
         sensor_recv.sensor = TEMPERATURE;
-        sensor_recv.timestamp = tv.tv_sec;
+        //sensor_recv.timestamp = tv.tv_sec;
+        sprintf(sensor_recv.timestamp,"%s",getDateString());
         sensor_recv.status = GOOD;
         sensor_recv.data.temperatureData = data;
 
         if((nbytes = mq_send(proc_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
-       // if((nbytes = mq_send(temp_mq, proc_msg, 13, 30)) == ERROR)
          {
            perror("mq_send");
          }

@@ -2,11 +2,12 @@
 #include "sequencer.h"
 #include <sys/time.h>
 #include "TMP102.h"
+#include "datetime_service.h"
+
 void *processorThread(void *threadp)
 {
   int nbytes,prio;
   message_t sensor_recv;
-  struct timeval tv;
 
 
  while(1){
@@ -21,15 +22,12 @@ void *processorThread(void *threadp)
            sensor_recv.type,sensor_recv.sensor,sensor_recv.data.lightData, prio, nbytes);
 
       if(sensor_recv.sensor == LIGHT){
-        //memset(&sensor_recv,0,sizeof(sensor_recv));
-        gettimeofday(&tv,NULL);
         sensor_recv.sensor = LIGHT;
-        sensor_recv.timestamp = tv.tv_sec;
+        sprintf(sensor_recv.timestamp,"%s",getDateString());
         sensor_recv.status = GOOD;
         sensor_recv.data.lightData = sensor_recv.data.lightData;
 
         if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
-       // if((nbytes = mq_send(temp_mq, proc_msg, 13, 30)) == ERROR)
          {
            perror("mq_send");
          }
@@ -39,15 +37,12 @@ void *processorThread(void *threadp)
          }
       }
       else if(sensor_recv.sensor == TEMPERATURE){
-        //memset(&sensor_recv,0,sizeof(sensor_recv));
-        gettimeofday(&tv,NULL);
         sensor_recv.sensor = TEMPERATURE;
-        sensor_recv.timestamp = tv.tv_sec;
+        sprintf(sensor_recv.timestamp,"%s",getDateString());
         sensor_recv.status = GOOD;
         sensor_recv.data.temperatureData = temperature_F(sensor_recv.data.temperatureData);
 
         if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
-       // if((nbytes = mq_send(temp_mq, proc_msg, 13, 30)) == ERROR)
          {
            perror("mq_send");
          }

@@ -1,0 +1,17 @@
+#include <stdlib.h>
+#include <sys/time.h>
+#include <time.h>
+#include "datetime_service.h"
+
+char* getDateString() {
+    // Initialize and get current time
+    time_t t = time( NULL );
+
+    // Allocate space for date string
+    char* date = (char*)malloc( 100 );
+
+    // Format the time correctly
+    strftime(date, 100, "[%F %T]", localtime(&t));
+
+    return date;
+}

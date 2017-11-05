@@ -14,7 +14,6 @@ void *loggerThread(void *threadp)
   FILE *fp_logger = NULL;
   int nbytes,prio;
   message_t sensor_recv;
-  struct timeval tv;
   uint8_t previous_state = 0;
 
  while(1){
@@ -37,20 +36,18 @@ void *loggerThread(void *threadp)
     else
     {
       if(sensor_recv.sensor == LIGHT){
-        // printf("receive: msg %d received with priority = %d, length = %d\n",
-        //      sensor_recv->type, prio, nbytes);
-
-        fprintf(fp_data, "Light is %f at timestamp %lu\n\n", sensor_recv.data.lightData, sensor_recv.timestamp);
+        
+        fprintf(fp_data, "%s Light is %f \n\n", sensor_recv.timestamp,sensor_recv.data.lightData);
 
       }
       else if (sensor_recv.sensor == TEMPERATURE){
 
-        fprintf(fp_data, "Temperature is %f at timestamp %lu\n\n", sensor_recv.data.temperatureData, sensor_recv.timestamp);
+        fprintf(fp_data, "%s Temperature is %f \n\n", sensor_recv.timestamp, sensor_recv.data.temperatureData);
 
       }
       else if (sensor_recv.type == LOG_FILE) {
 
-        fprintf(fp_logger, "%s type: %d timestamp %lu\n\n", sensor_recv.data.loggerData,sensor_recv.type, sensor_recv.timestamp);
+        fprintf(fp_logger, "%s %s type: %d \n\n",sensor_recv.timestamp, sensor_recv.data.loggerData,sensor_recv.type);
 
       }
       

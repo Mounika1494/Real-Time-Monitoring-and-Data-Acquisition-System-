@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include <math.h>
 #include "error.h"
+#include "datetime_service.h"
 
 #define NUM_THREADS 5
 #define POSIX_QUEUE
@@ -56,7 +57,8 @@ typedef struct
   sensor_t sensor;
   status_t status;
   error_t error;
-  time_t timestamp;
+  //time_t timestamp;
+  char timestamp[60];
   data_t data;
 }message_t;
 
