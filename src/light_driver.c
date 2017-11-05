@@ -24,7 +24,7 @@ void *lightThread(void *threadp)
   
   
  
-  if(write_one_byte(&file_APDS9301, 0x80|0x00 , 0x03) == SUCCESS){
+  if(write_one_byte(&file_APDS9301, 0x80|0x00 , 0x03) == success){
     //sprintf(sensor_recv.data.loggerData,"%s","Light sensor initialization success\n"); 
     sensor_recv.status = GOOD; 
   }else{
@@ -58,7 +58,7 @@ void *lightThread(void *threadp)
       //read_two_byte(&file_APDS9301,0x80|0x20|0x0C, &data);
       
       
-      if (read_two_byte(&file_APDS9301,0x80|0x20|0x0C, &data)==FAIL){
+      if (read_two_byte(&file_APDS9301,0x80|0x20|0x0C, &data)==fail){
         
         sprintf(sensor_recv.data.loggerData,"%s","Light sensor read failed\n"); 
           sensor_recv.status = BAD; 

@@ -1,4 +1,5 @@
 #include "i2c.h"
+#include <stdint.h>
 #include <pthread.h>
 #include <errno.h>
 #include <string.h>
@@ -18,14 +19,14 @@ int8_t i2c_init(int *fileHandle, char *filename, uint8_t slaveAddress){
   if ((*fileHandle = open(filename, O_RDWR)) < 0) {
 
       perror("Failed to open the i2c bus");
-      return FAIL;
+      return fail;
   }
 
   //int addr = 0b0111001;          // The I2C address of the ADC
   if (ioctl(*fileHandle, I2C_SLAVE, slaveAddress) < 0) {
 
       printf("Failed to acquire bus access and/or talk to slave.\n");
-      return FAIL;
+      return fail;
   }
   else{
       printf("connected successfully\n");
@@ -33,7 +34,7 @@ int8_t i2c_init(int *fileHandle, char *filename, uint8_t slaveAddress){
   pthread_mutex_unlock(&i2c_mutex);
   pthread_mutex_destroy(&i2c_mutex);
 
-  return SUCCESS;
+  return success;
 }
 
 
@@ -43,15 +44,15 @@ int8_t write_one_byte(int *fileHandle, uint8_t reg, uint8_t data){
   pthread_mutex_lock(&i2c_mutex);
   if (write(*fileHandle, &reg, 1) != 1) {
   	perror("Write error: ");
-    return FAIL;
+    return fail;
   }
   if (write(*fileHandle, &data, 1) != 1) {
 	perror("Write error:");
-  return FAIL;
+  return fail;
   }
   pthread_mutex_unlock(&i2c_mutex);
   pthread_mutex_destroy(&i2c_mutex);
-  return SUCCESS;
+  return success;
 
 }
 
@@ -63,16 +64,16 @@ int8_t read_one_byte(int *fileHandle, uint8_t reg, uint8_t *data){
   pthread_mutex_lock(&i2c_mutex);
   if (write(*fileHandle, &reg, 1) != 1) {
 		perror("Write error:");
-    return FAIL;
+    return fail;
 	}
 	if (read(*fileHandle, data, 1) != 1) {
 		perror("Read error:");
-    return FAIL;
+    return fail;
 	}
 	//printf("reg val is: %d\n", *data );
   pthread_mutex_unlock(&i2c_mutex);
   pthread_mutex_destroy(&i2c_mutex);
-  return SUCCESS;
+  return success;
 }
 
 
@@ -82,16 +83,16 @@ int8_t read_two_byte(int *fileHandle, uint8_t reg, uint16_t *data){
   pthread_mutex_lock(&i2c_mutex);
   if (write(*fileHandle, &reg, 1) != 1) {
 		perror("Write error:");
-    return FAIL;
+    return fail;
 	}
 	if (read(*fileHandle, data, 2) != 2) {
 		perror("Read error:");
-    return FAIL;
+    return fail;
 	}
 
   pthread_mutex_unlock(&i2c_mutex);
   pthread_mutex_destroy(&i2c_mutex);
-  return SUCCESS;
+  return success;
 }
 
 
@@ -101,9 +102,9 @@ int8_t write_two_byte(int *file,uint8_t* data)
     if(write(*file, data, 3)!=3)
     {
         perror("write word failed\n");
-        return FAIL;
+        return fail;
     }
     pthread_mutex_unlock(&i2c_mutex);
     pthread_mutex_destroy(&i2c_mutex);
-    return SUCCESS;
+    return success;
 }

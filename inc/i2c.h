@@ -24,8 +24,8 @@
 
 //enum for status of each driver function
 enum return_code{
-  SUCCESS = 0,
-  FAIL = -1
+  success = 0,
+  fail = -1
 };
 
 /***
@@ -80,5 +80,7 @@ extern int8_t read_one_byte(int *file, uint8_t reg, uint8_t *data);
 *               success - writing successfull 
 */
 extern int8_t read_two_byte(int *file, uint8_t reg, uint16_t *data);
+
+extern int8_t write_two_byte(int *file,uint8_t* data);
 
 #endif
