@@ -9,13 +9,13 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 * Connect the TMP102 and APDS 9301 to the i2c2 bus of Beaglebone.
-
+* We are used CMOCKA Unit test framework. Ensure you have installed it.
 
 ### Installing
 
 A step by step series of examples that tell you have to get a development env running
 
-First git clone the repo on both the machines you want to test.
+First git clone the repo on the machine you want to test.
 
 ```
 https://github.com/Mounika1494/Real-Time-Monitoring-and-Data-Acquisition-System-
@@ -27,8 +27,15 @@ Then run make
 make
 ```
 
-For more detailed steps look into HOWTO 
-For sample outputs see RealtimeDataAcquistion.pdf
+### Using
+
+* The data of sensors will be logged in <user_defined>.txt and all status/errors in <user_defined>.txt
+* When you want to stop logging do a Ctrl+C
+* Watch out for last led on the beagle bone. If the frequency of blink is too high then check your connections. The program     automatically recovers if you are able to correct the connections (even during runtime). On no error the frequency will be   less.  
+* If you want to test your connections and sensors working there are unit tests in tests/ folder
+* Change accordingly in Makefile and do a make
+* For sample outputs/architecture see RealtimeDataAcquistion.pdf
+
 ## Authors
 
 * **Jayakrishnan HJ** - https://github.com/hjjayakrishnan
