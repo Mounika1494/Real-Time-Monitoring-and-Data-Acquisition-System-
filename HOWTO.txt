@@ -1,0 +1,10 @@
+1.	Download the git repository https://github.com/Mounika1494/Real-Time-Monitoring-and-Data-Acquisition-System-.git
+2.	Make sure sensors are connected. Both sensors are using the same bus I2C2 of beagle bone green 
+3.	Do a make and output generated will be RT_LOGGER. You should give file name where you want to store sensor data         and logger data
+        Note: You should run being a root or use sudo
+4.	When you want to stop logging do a Ctrl+C
+5.	The data of sensors will be logged in data.txt and any error in logger.txt
+6.	Watch out for last led on the beagle bone. If the frequency of blink is too high then check your connections         which will be recovered if you are able to correct the connections. On no error the frequency will be less.
+7.	We are used CMOCKA Unit test framework. Make sure you have installed it
+8.	If you want to test your connections and sensors working there are unit tests in tests/ folder 
+9.	Change accordingly in Makefile and do a make.
