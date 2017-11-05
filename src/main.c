@@ -152,9 +152,9 @@ int main (int argc, char *argv[])
         
 	}
 
-    main_param.sched_priority=rt_max_prio - NUM_THREADS - 2;
-    rc=sched_setscheduler(getpid(), SCHED_FIFO, &main_param);
-    if(rc < 0) perror("main_param");
+    //main_param.sched_priority=rt_max_prio - NUM_THREADS - 2;
+    //rc=sched_setscheduler(getpid(), SCHED_FIFO, &main_param);
+    //if(rc < 0) perror("main_param");
 
 //sequence//
 
