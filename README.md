@@ -27,6 +27,8 @@ Then run make
 make
 ```
 
+For more detailed steps look into HOWTO 
+For sample outputs see RealtimeDataAcquistion.pdf
 ## Authors
 
 * **Jayakrishnan HJ** - https://github.com/hjjayakrishnan
