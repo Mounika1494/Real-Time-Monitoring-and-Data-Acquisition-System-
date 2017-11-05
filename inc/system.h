@@ -51,11 +51,19 @@ typedef enum{
   TEMPERATURE
 }sensor_t;
 
+typedef enum{
+  NIGHT = 1,
+  DAY,
+  HOT,
+  COLD
+}state_t;
+
 typedef struct
 {
   destination_t type;
   sensor_t sensor;
   status_t status;
+  state_t state;
   error_t error;
   char timestamp[40];
   data_t data;

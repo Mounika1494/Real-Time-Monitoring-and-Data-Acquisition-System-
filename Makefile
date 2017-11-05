@@ -8,7 +8,7 @@ OPTVAL = -O0
 
 CFLAGS = -I./inc \
 
-LIBS= -lpthread -lrt
+LIBS= -lpthread -lrt -lm
 
 SOURCES := $(wildcard $(SRC)/*.c)
 OBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SOURCES))

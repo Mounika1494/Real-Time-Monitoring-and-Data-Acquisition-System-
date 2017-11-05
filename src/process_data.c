@@ -8,8 +8,8 @@ void *processorThread(void *threadp)
 {
   int nbytes,prio;
   message_t sensor_recv;
-
-
+  int8_t current_state = 0;
+  int8_t previous_state = 1;
  while(1){
    printf("\n waiting on process_mq \n");
     if((nbytes = mq_receive(proc_mq,(char*)&sensor_recv, MAX_MSG_SIZE, &prio)) == ERROR)
@@ -27,7 +27,17 @@ void *processorThread(void *threadp)
         sprintf(sensor_recv.timestamp,"%s",getDateString());
         sensor_recv.status = GOOD;
         sensor_recv.data.lightData = sensor_recv.data.lightData;
-
+        if(sensor_recv.data.lightData < 1)
+            current_state = NIGHT;
+        else
+            current_state = DAY;
+        if(current_state != previous_state)
+        {
+            sensor_recv.type = LOG_FILE;
+            sensor_recv.status = GOOD;
+            previous_state = current_state;
+            sprintf(sensor_recv.data.loggerData,"%s","DEBUG INFO: light state changed\n");
+        }
         if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
          {
            perror("mq_send");

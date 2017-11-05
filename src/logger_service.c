@@ -44,7 +44,7 @@ void *loggerThread(void *threadp)
         }
         else if (sensor_recv.sensor == TEMPERATURE){
 
-          fprintf(fp_data, "%s Queried Temperature is %f \n\n", sensor_recv.timestamp, sensor_recv.data.temperatureData);
+          fprintf(fp_data, "%s Queried Temperature is %fC\n\n", sensor_recv.timestamp, sensor_recv.data.temperatureData);
 
         }
 
@@ -58,7 +58,7 @@ void *loggerThread(void *threadp)
         }
         else if (sensor_recv.sensor == TEMPERATURE){
   
-          fprintf(fp_data, "%s Temperature is %f \n\n", sensor_recv.timestamp, sensor_recv.data.temperatureData);
+          fprintf(fp_data, "%s Temperature is %fF \n\n", sensor_recv.timestamp, sensor_recv.data.temperatureData);
   
         }
 
