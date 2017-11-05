@@ -27,6 +27,13 @@ Then run make
 make
 ```
 
+Output generated will be RT_LOGGER. You should give file name where you want to store sensor data and logger data
+Note: You should run being a root or use sudo
+
+```
+sudo ./RT_LOGGER
+```
+
 ### Using
 
 * The data of sensors will be logged in <user_defined>.txt and all status/errors in <user_defined>.txt
