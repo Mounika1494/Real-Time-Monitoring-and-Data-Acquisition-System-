@@ -37,7 +37,7 @@ sudo ./RT_LOGGER <path to sensor_data.txt> <path to logger.txt>
 ### Using
 
 * The data of sensors will be logged in <user_defined>.txt and all status/errors in <user_defined>.txt
-* When you want to stop logging do a Ctrl+C
+* When you want to stop logging do a Ctrl+C.
 * Watch out for last led on the beagle bone. If the frequency of blink is too high then check your connections. The program     automatically recovers if you are able to correct the connections (even during runtime). On no error the frequency will be   less.  
 * If you want to test your connections and sensors working there are unit tests in tests/ folder
 * Change accordingly in Makefile and do a make
