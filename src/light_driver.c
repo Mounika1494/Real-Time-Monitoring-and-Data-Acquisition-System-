@@ -3,6 +3,8 @@
 #include "sequencer.h"
 #include <sys/time.h>
 #include "i2c.h"
+#include "datetime_service.h"
+#include <math.h>
 
 #ifdef POSIX_QUEUE
   #include <mqueue.h>
@@ -11,31 +13,26 @@
 #endif
 
 #define APDS9301_ADDR 0x39
+
+//thread handler for light thread
 void *lightThread(void *threadp)
 {
   int nbytes,prio;
-  struct timeval tv;
   message_t sensor_recv;
-  int file_APDS9301;
-  char *filename = "/dev/i2c-2";
-  uint16_t data;
-  i2c_init(&file_APDS9301,filename,APDS9301_ADDR);
- // write_one_byte(&file_APDS9301, 0x80|0x00 , 0x03);
-  
-  
- 
-  if(write_one_byte(&file_APDS9301, 0x80|0x00 , 0x03) == SUCCESS){
-    //sprintf(sensor_recv.data.loggerData,"%s","Light sensor initialization success\n"); 
+  float_t data_CH0;
+  float_t data_CH1;
+  APDS9301_init();
+  float_t luminosity = 0;
+  if(APDS9301_poweron() == SUCCESS){
+    sprintf(sensor_recv.data.loggerData,"%s","DEBUG INFO: Light sensor initialization success\n"); 
     sensor_recv.status = GOOD; 
   }else{
-    sprintf(sensor_recv.data.loggerData,"%s","Light sensor initialization failed\n");
+    sprintf(sensor_recv.data.loggerData,"%s","DEBUG ERROR:Light sensor initialization failed\n");
     sensor_recv.status = BAD;
   }
-  gettimeofday(&tv,NULL);
-  sensor_recv.timestamp = tv.tv_sec;
+  sprintf(sensor_recv.timestamp,"%s",getDateString());
   sensor_recv.type = LOG_FILE;
   if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
-      // if((nbytes = mq_send(temp_mq, proc_msg, 13, 30)) == ERROR)
   {
     perror("mq_send");
   }
@@ -43,8 +40,6 @@ void *lightThread(void *threadp)
   {
     printf("Light: init for log file: %d bytes: message successfully sent\n", nbytes);
   }
-  
-  
   
    while(1){
   
@@ -55,18 +50,28 @@ void *lightThread(void *threadp)
     }
     else
     {
-      //read_two_byte(&file_APDS9301,0x80|0x20|0x0C, &data);
-      
-      
-      if (read_two_byte(&file_APDS9301,0x80|0x20|0x0C, &data)==FAIL){
+      if (read_light_CH0(&data_CH0)==fail){
         
-        sprintf(sensor_recv.data.loggerData,"%s","Light sensor read failed\n"); 
+        sprintf(sensor_recv.data.loggerData,"%s","DEBUG ERROR: Light sensor read failed\n"); 
           sensor_recv.status = BAD; 
-          gettimeofday(&tv,NULL);
-          sensor_recv.timestamp = tv.tv_sec;
+          sprintf(sensor_recv.timestamp,"%s",getDateString());
           sensor_recv.type = LOG_FILE;
           if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
-              // if((nbytes = mq_send(temp_mq, proc_msg, 13, 30)) == ERROR)
+          {
+            perror("mq_send");
+          }
+          else
+          {
+            printf("Light: init for log file: %d bytes: message successfully sent\n", nbytes);
+          }  
+      }
+      if (read_light_CH1(&data_CH1)==fail){
+        
+        sprintf(sensor_recv.data.loggerData,"%s","DEBUG ERROR: Light sensor read failed\n"); 
+          sensor_recv.status = BAD; 
+          sprintf(sensor_recv.timestamp,"%s",getDateString());
+          sensor_recv.type = LOG_FILE;
+          if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
           {
             perror("mq_send");
           }
@@ -77,19 +82,48 @@ void *lightThread(void *threadp)
       }
       
       
-      
+      luminosity = cal_luminosity(data_CH0,data_CH1);
       printf("light receive: msg %d received with priority = %d, length = %d\n",
              sensor_recv.type, prio, nbytes);
       if(sensor_recv.type == PROCESS_QUEUE) {
-        // memset(&sensor_recv,0,sizeof(sensor_recv));
-        gettimeofday(&tv,NULL);
         sensor_recv.sensor = LIGHT;
-        sensor_recv.timestamp = tv.tv_sec;
+        sprintf(sensor_recv.timestamp,"%s",getDateString());
         sensor_recv.status = GOOD;
-        sensor_recv.data.lightData = (float_t)data;
+        sensor_recv.data.lightData = (float_t)luminosity;
         printf("***************************\n lightdata: %f timestamp %lu\n",sensor_recv.data.lightData,sensor_recv.timestamp );
+        if(luminosity>100)
+        {
+          sensor_recv.type = QUERY_QUEUE; 
+          if((nbytes = mq_send(temp_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
+           {
+             perror("mq_send");
+           }
+           else
+           {
+             printf("2_T. temp thread sending proc q: %d bytes: message successfully sent\n", nbytes);
+           }
+        }
+        else
+        {
         if((nbytes = mq_send(proc_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
-       // if((nbytes = mq_send(temp_mq, proc_msg, 13, 30)) == ERROR)
+         {
+           perror("mq_send");
+         }
+         else
+         {
+           printf("2_L. light thread sending proc q: %d bytes: message successfully sent\n", nbytes);
+         }
+        }
+      }
+      else if(sensor_recv.type == QUERY_QUEUE)
+      {
+        sensor_recv.type = QUERY_QUEUE;
+        sensor_recv.sensor = LIGHT;
+        sprintf(sensor_recv.timestamp,"%s",getDateString());
+        sensor_recv.status = GOOD;
+        sensor_recv.data.lightData = (float_t)luminosity;
+        printf("***************************\n lightdata: %f timestamp %lu\n",sensor_recv.data.lightData,sensor_recv.timestamp );
+        if((nbytes = mq_send(log_mq, (char *)&sensor_recv, sizeof(sensor_recv), 30)) == ERROR)
          {
            perror("mq_send");
          }

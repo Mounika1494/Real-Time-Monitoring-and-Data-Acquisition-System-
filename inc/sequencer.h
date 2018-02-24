@@ -26,6 +26,7 @@
 #include <semaphore.h>
 #include <mqueue.h>
 
+
 #define MAX_MSG_SIZE 256 //maximum message width
 #define ERROR (-1) //Error when mq open fails
 //virtual filesystem for respective queues

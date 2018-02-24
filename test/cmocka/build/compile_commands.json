@@ -1,0 +1,92 @@
+[
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/src",
+  "command": "/usr/bin/cc  -DCMOCKA_EXPORTS -DHAVE_CONFIG_H=1 -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/src -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/src -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG -fPIC   -o CMakeFiles/cmocka_shared.dir/cmocka.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/src/cmocka.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/src/cmocka.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/simple_test.dir/simple_test.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/simple_test.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/simple_test.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -DUNIT_TESTING=1 -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/allocate_module_test.dir/allocate_module.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/allocate_module.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/allocate_module.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/allocate_module_test.dir/allocate_module_test.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/allocate_module_test.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/allocate_module_test.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -DUNIT_TESTING=1 -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/calculator_test.dir/calculator.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/calculator.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/calculator.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/calculator_test.dir/calculator_test.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/calculator_test.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/calculator_test.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/key_value_test.dir/key_value.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/key_value.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/key_value.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/key_value_test.dir/key_value_test.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/key_value_test.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/key_value_test.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/assert_macro_test.dir/assert_macro.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/assert_macro.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/assert_macro.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/assert_macro_test.dir/assert_macro_test.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/assert_macro_test.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/assert_macro_test.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/customer_database_test.dir/customer_database.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/customer_database.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/customer_database.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/customer_database_test.dir/customer_database_test.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/customer_database_test.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/customer_database_test.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -DUNIT_TESTING=1 -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/assert_module_test.dir/assert_module.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/assert_module.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/assert_module.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/assert_module_test.dir/assert_module_test.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/assert_module_test.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/assert_module_test.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/product_database_test.dir/product_database.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/product_database.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/product_database.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/product_database_test.dir/product_database_test.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/product_database_test.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/product_database_test.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example/chef_wrap",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example/chef_wrap -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/chef_wrap -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/waiter_test_wrap.dir/waiter_test_wrap.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/chef_wrap/waiter_test_wrap.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/chef_wrap/waiter_test_wrap.c"
+},
+{
+  "directory": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example/chef_wrap",
+  "command": "/usr/bin/cc   -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build/example/chef_wrap -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/chef_wrap -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/build -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example -I/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O3 -DNDEBUG   -o CMakeFiles/waiter_test_wrap.dir/chef.c.o   -c /var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/chef_wrap/chef.c",
+  "file": "/var/lib/cloud9/ECEN5013Project1/local/HW1/test/cmocka-1.1.0/example/chef_wrap/chef.c"
+}
+]
